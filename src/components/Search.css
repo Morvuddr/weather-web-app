@@ -11,8 +11,23 @@
     text-align: left;
 }
 .searchInput {
-    height: 40px;
+    height: 35px;
     width: 160px;
+    margin-right: 10px;
+    background: #f0f0f0;
+}
+::placeholder { 
+    color: darkgray;
+    opacity: 1;
+}
+.searchButton {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 17.6px;
+    background: darkgray;
+    color: white;
 }
 
 @media( min-width: 700px) {

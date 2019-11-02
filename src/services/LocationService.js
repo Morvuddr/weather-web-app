@@ -1,5 +1,5 @@
 const url = 'https://api.openweathermap.org/data/2.5/weather';
-const APIkey = 'ea50fc4779b296f0c811b4543f95ed25';
+const APIkey = 'b50d06cf0be2ceacf57cf97451e6a7af';
 
 export default class LocationService {
     static handleUpdateLocation = async () => {
@@ -26,12 +26,12 @@ export default class LocationService {
     };
 
     static async getWeatherByLocation(location) {
-        let destinationURL = `${url}?lat=${location.lat}&lon=${location.lon}&APPID=${APIkey}`;
+        let destinationURL = `?lat=${location.lat}&lon=${location.lon}&APPID=${APIkey}`;
         return await LocationService.request(destinationURL);
     }
     static async getWeatherByCityName(name) {
-        let destinationURL = `${url}?q=${name}&APPID=${APIkey}`;
-        return await LocationService.request(destinationURL);
+        let destinationURL = `?q=${name}&APPID=${APIkey}`;
+        return LocationService.parseWeatherData(await LocationService.request(destinationURL));
     }
 
     static request = (destinationURL) => new Promise((resolve, reject) => {
@@ -49,7 +49,7 @@ export default class LocationService {
                 return resolve({ data: '', error: errorString });
             }
         }
-        xmlHttp.open("GET", destinationURL, true);
+        xmlHttp.open("GET", `${url}${destinationURL}`, true);
         xmlHttp.send(null);
     })
 
@@ -57,7 +57,7 @@ export default class LocationService {
         console.log(result);
         const { data } = result;
         return {
-            cityName: data.name,
+            name: data.name,
             img: "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png",
             temperature: (data.main.temp - 273.15).toFixed(0) + '°C',
             wind: data.wind.speed + ' m/s',
