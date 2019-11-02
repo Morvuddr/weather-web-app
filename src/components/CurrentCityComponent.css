@@ -1,0 +1,25 @@
+.currentCity{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.currentCity h1 {
+    text-align: left;
+}
+
+.additionalInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-between;
+}
+.additionalInfo h1{
+    font-size: 60px;
+    margin: 0;
+}
+.weatherImage{
+    width: 90px;
+    height: 90px;
+}

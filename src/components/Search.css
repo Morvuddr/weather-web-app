@@ -1,0 +1,23 @@
+.search{
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto 0 auto;
+    height: 160px;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+}
+.search h1 {
+    text-align: left;
+}
+.searchInput {
+    height: 40px;
+    width: 160px;
+}
+
+@media( min-width: 700px) {
+    .search {
+        height: 80px;
+        flex-direction: row;
+    }
+}
