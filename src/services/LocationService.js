@@ -1,7 +1,5 @@
 const url = 'https://api.openweathermap.org/data/2.5/weather';
-const APIkey = '8830d9a0c3a419f55f3e4488ea421320';
-
-// Добрый день, Руслан. Я студент из группы М3403. У меня есть вопрос по второй лабе: нужно ли каждый раз при заходе на страницу запрашивать разрешение на использование геолокации? Ведь выбор пользователя сохраняется, пока он сам не захочет изменить разрешенные права.
+const APIkey = 'ea50fc4779b296f0c811b4543f95ed25';
 
 export default class LocationService {
     static handleUpdateLocation = async () => {
