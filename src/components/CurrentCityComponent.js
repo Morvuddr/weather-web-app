@@ -1,12 +1,12 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import './CurrentCityComponent.css';
+import '../styles/MainContainer.css';
 
 const CurrentCityComponent = ({ weather }) => (
     !!weather ?
         <div className="currentCity">
             <h1>
-                {weather.cityName}
+                {weather.name}
             </h1>
             <div className="additionalInfo">
                 <img

@@ -1,30 +1,28 @@
 import * as types from './actionTypes';
 import { CITIES } from '../../helpers/const';
 import WeatherLocalStorage from '../../helpers/WeatherLocalStorage';
-import LocationService from '../../services/LocationService';
+import LocationService from '../../helpers/LocationService';
 import generateId from '../../helpers/generateId';
 
 export function addNewCityAsync(newCity) {
     return async (dispatch) => {
-        console.log(123455);
         if (!newCity.id) {
             newCity.id = generateId();
         }
 
         dispatch(addNewCityLoading(newCity.id, true));
-        try {
-            dispatch(addNewCity(newCity));
+        dispatch(addNewCity(newCity));
+        const { city, error } = await LocationService.getWeatherByCityName(newCity.name);
+        city.id = newCity.id;
 
-            const city = await LocationService.getWeatherByCityName(newCity.name);
-            city.id = newCity.id;
-
+        if (error) {
+            dispatch(loadingError(newCity.id));
+        } else {
             dispatch(updateCity(city));
-        } catch (e) {
-            // TBD
         }
+
         new WeatherLocalStorage(CITIES).addArrayItem(newCity);
         dispatch(addNewCityLoading(newCity.id, false));
-
     };
 }
 
@@ -39,26 +37,26 @@ export function updateCity(city) {
 export function initCities() {
     return async (dispatch) => {
         const cities = new WeatherLocalStorage(CITIES).getItem() || [];
-        cities.map(async city => {
-            dispatch(addNewCityLoading(city.id, true));
-            try {
+        cities.map(async localCity => {
+            dispatch(addNewCityLoading(localCity.id, true));
+            dispatch(addNewCity(localCity));
+            const { city, error } = await LocationService.getWeatherByCityName(localCity.name);
+            city.id = localCity.id;
 
-                dispatch(addNewCity(city));
-                const newCity = await LocationService.getWeatherByCityName(city.name);
-                newCity.id = city.id;
-
-                dispatch(updateCity(newCity));
-            } catch (e) {
-                // TBD
+            if (error) {
+                dispatch(loadingError(localCity.id));
+            } else {
+                dispatch(updateCity(city));
             }
-            dispatch(addNewCityLoading(city.id, false));
+
+            dispatch(addNewCityLoading(localCity.id, false));
         });
     };
 }
 
-export function deleteCity(id) {
+export function removeCity(id) {
     new WeatherLocalStorage(CITIES).removeArrayItem(id);
-    return ({ type: types.DELETE_CITY, payload: { id } });
+    return ({ type: types.REMOVE_CITY, payload: { id } });
 }
 
 export function addNewCityLoading(id, isLoading) {
@@ -69,4 +67,11 @@ export function addNewCityLoading(id, isLoading) {
             isLoading
         }
     };
+}
+
+export function loadingError(id) {
+    return {
+        type: types.LOADING_ERROR,
+        payload: { id }
+    }
 }

@@ -1,13 +1,12 @@
 import React from 'react';
-import './Loader.css';
+import '../styles/App.css';
 
-export function Loader(){
-    return(
-        <div className="Loader">
-            <h1>Подождите, данные загружаются</h1>
-            <div className="Spinner">
-
-            </div>
+const Loader = () => (
+    <div className="Loader">
+        <h1>Подождите, данные загружаются</h1>
+        <div className="Spinner">
         </div>
-    );
-}
+    </div>
+);
+
+export default Loader;

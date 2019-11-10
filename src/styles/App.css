@@ -1,0 +1,83 @@
+.App-header {
+  display: flex;
+  flex-direction: column;
+  height: 160px;
+  width: 90%;
+  margin: auto;
+}
+.Refresh-Location-Button {
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 12px;
+  background: lightgrey;
+}
+
+@media (min-width: 700px) {
+  
+  .App-header{
+    
+    position: relative;
+    flex-direction: row;
+    height: 80px;
+
+  }
+  .Refresh-Location-Button {
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    left: 50%;
+    margin-left: -100px;
+    
+  }
+}
+
+.Loader{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Loader h1{
+  text-align: center;
+}
+.Spinner{
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid gray;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.WeatherInfo{
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.Info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  background: gray;
+}
+.Info h3{
+  margin: 0px;
+  padding-left: 10px;
+  color: white;
+}
+.Info h4{
+  margin: 0px;
+  padding-right: 10px;
+  color: lightgray;
+}
+.Error {
+  text-align: center;
+}

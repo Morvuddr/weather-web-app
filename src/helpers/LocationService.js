@@ -5,7 +5,8 @@ export default class LocationService {
     static handleUpdateLocation = async () => {
         const location = await LocationService.getLocation();
         const result = await LocationService.getWeatherByLocation(location);
-        return LocationService.parseWeatherData(result);
+        const { city } = LocationService.parseWeatherData(result);
+        return city;
     };
 
     static getLocation = async () => {
@@ -35,28 +36,28 @@ export default class LocationService {
     }
 
     static request = (destinationURL) => new Promise((resolve, reject) => {
-
-        console.log(destinationURL);
         let xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-                let data = JSON.parse(xmlHttp.responseText)
-                return resolve({ data: data, error: '' });
+                const data = JSON.parse(xmlHttp.responseText)
+                return resolve({ data: data, error: false });
             } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
-                console.log(xmlHttp.responseText);
-                let data = JSON.parse(xmlHttp.responseText);
-                let errorString = 'Congratulations, you broke the site! :) \n (Most likely, the problem is this: ' + data.message + ' )';
-                return resolve({ data: '', error: errorString });
+                return resolve({ data: '', error: true });
             }
-        }
+        };
         xmlHttp.open("GET", `${url}${destinationURL}`, true);
         xmlHttp.send(null);
-    })
+    });
 
-    static parseWeatherData = (result) => {
-        console.log(result);
-        const { data } = result;
-        return {
+    static parseWeatherData = ({data, error}) => {
+        if (error) {
+            return ({
+                city: {},
+                error: error,
+            });
+        }
+        return ({
+            city : {
             name: data.name,
             img: "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png",
             temperature: (data.main.temp - 273.15).toFixed(0) + '°C',
@@ -65,6 +66,8 @@ export default class LocationService {
             pressure: data.main.pressure + ' hpa',
             humidity: data.main.humidity + ' %',
             location: '[' + data.coord.lat + ',' + data.coord.lon + ']',
-        };
+            },
+            error: error,
+        });
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import './Search.css'
+import * as PropTypes from 'prop-types';
+import '../styles/FavoritesContainer.css'
 
 const Search = ({ onSubmit }) => (
     <div className='search'>
@@ -7,10 +8,14 @@ const Search = ({ onSubmit }) => (
             Избранное
         </h1>
         <form onSubmit={onSubmit}>
-            <input className='searchInput' placeholder='Добавить новый город' name='cityName'></input>
+            <input className='searchInput' placeholder='Добавить новый город' name='cityName' required='required'></input>
             <button className='searchButton' type='submit'>&#43;</button>
         </form>
     </div>
 )
+
+Search.propTypes = {
+    onSubmit: PropTypes.func
+}
 
 export default Search;

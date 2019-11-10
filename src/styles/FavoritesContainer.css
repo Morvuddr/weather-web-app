@@ -1,0 +1,76 @@
+.search{
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto 0 auto;
+    height: 160px;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+}
+.search h1 {
+    text-align: left;
+}
+.searchInput {
+    height: 35px;
+    width: 160px;
+    margin-right: 10px;
+    background: #f0f0f0;
+    text-align: center;
+}
+::placeholder {
+    color: darkgray;
+    opacity: 1;
+    text-align: center;
+}
+.searchButton {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 17.6px;
+    background: darkgray;
+    color: white;
+}
+
+@media( min-width: 700px) {
+    .search {
+        height: 80px;
+        flex-direction: row;
+    }
+}
+.favCityHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+.deleteButton {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 17.6px;
+    background: darkgray;
+    color: white;
+}
+.FavList {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+}
+.FavoriteCity {
+    width: 48%;
+    height: 325px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.FavoriteCity .WeatherInfo {
+    width: 100%;
+    height: 100%;
+}

@@ -1,8 +1,9 @@
-import { ADD_NEW_CITY, ADD_NEW_CITY_LOADING, DELETE_CITY, UPDATE_CITY } from './actionTypes';
+import { ADD_NEW_CITY, ADD_NEW_CITY_LOADING, REMOVE_CITY, UPDATE_CITY, LOADING_ERROR } from './actionTypes';
 
 const initialState = {
     cities: [],
-    isLoading: []
+    isLoading: [],
+    errors: [],
 };
 
 export function favoritesReducer(state = initialState, action) {
@@ -37,16 +38,28 @@ export function favoritesReducer(state = initialState, action) {
             }
             return {
                 ...state,
-                isLoading: newIsLoading
+                isLoading: newIsLoading,
             };
         }
 
-        case DELETE_CITY: {
+        case REMOVE_CITY: {
             const cities = [...state.cities];
-            cities.splice(action.payload.id, 1);
+            cities.splice(cities.findIndex(c => c.id === action.payload.id), 1);
             return {
                 ...state,
                 cities,
+            };
+        }
+
+        case LOADING_ERROR: {
+            const id = action.payload.id;
+            const errors = [...state.errors];
+            if (!errors.includes(id)) {
+                errors.push(id);
+            }
+            return {
+                ...state,
+                errors,
             };
         }
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import './MainContainer.css'
+import '../styles/MainContainer.css'
 import WeatherInfo from '../components/WeatherInfo';
-import { Loader } from '../components/Loader';
+import Loader from '../components/Loader';
 import CurrentCityComponent from '../components/CurrentCityComponent'
 
 export default class MainContainer extends React.Component {

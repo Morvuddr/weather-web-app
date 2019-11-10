@@ -6,10 +6,10 @@ const Header = ({ onUpdate = f => f }) => (
         <h1 className='App-title'>Погода здесь</h1>
         <button className='Refresh-Location-Button' onClick={onUpdate}>Обновить геолокацию</button>
     </header>
-)
+);
 
 Header.propTypes = {
     onUpdate: PropTypes.func
-}
+};
 
 export default Header;

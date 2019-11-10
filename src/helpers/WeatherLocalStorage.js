@@ -16,7 +16,7 @@ export default class WeatherLocalStorage {
     removeArrayItem = (id) => {
         const array = this.getItem();
         if (Array.isArray(array)) {
-            array.splice(id, 1);
+            array.splice(array.findIndex(c => c.id === id), 1);
             this.setItem(array);
         } else {
             this.setItem([]);

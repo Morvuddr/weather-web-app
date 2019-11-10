@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './App.css';
+import '../styles/App.css';
 import MainContainer from './MainContainer';
-import LocationService from '../services/LocationService';
+import LocationService from '../helpers/LocationService';
 import Header from '../components/Header';
 import FavoritesContainer from './FavoritesContainer';
 import { initCities } from '../redux/favorites/actions';
@@ -34,7 +34,6 @@ class App extends Component {
     };
 
     render() {
-        console.log(this.props.city);
         const { isLoading, weather } = this.state;
         return (
             <div className='App'>

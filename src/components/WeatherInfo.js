@@ -1,5 +1,5 @@
 import React from 'react';
-import './WeatherInfo.css'
+import '../styles/App.css';
 
 export default class WeatherInfo extends React.Component {
     render() {
