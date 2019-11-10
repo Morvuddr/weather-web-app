@@ -1,0 +1,3 @@
+export const CITY_LOADING = 'city.CITY_LOADING';
+export const CITY_LOADING_ERROR =  'city.CITY_LOADING_ERROR';
+export const CITY_LOADING_SUCCESS = 'city.CITY_LOADING_SUCCESS';

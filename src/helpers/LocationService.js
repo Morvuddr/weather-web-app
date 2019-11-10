@@ -4,9 +4,7 @@ const APIkey = 'b50d06cf0be2ceacf57cf97451e6a7af';
 export default class LocationService {
     static handleUpdateLocation = async () => {
         const location = await LocationService.getLocation();
-        const result = await LocationService.getWeatherByLocation(location);
-        const { city } = LocationService.parseWeatherData(result);
-        return city;
+        return await LocationService.getWeatherByLocation(location);
     };
 
     static getLocation = async () => {
@@ -28,7 +26,7 @@ export default class LocationService {
 
     static async getWeatherByLocation(location) {
         let destinationURL = `?lat=${location.lat}&lon=${location.lon}&APPID=${APIkey}`;
-        return await LocationService.request(destinationURL);
+        return LocationService.parseWeatherData(await LocationService.request(destinationURL));
     }
     static async getWeatherByCityName(name) {
         let destinationURL = `?q=${name}&APPID=${APIkey}`;
@@ -39,7 +37,7 @@ export default class LocationService {
         let xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-                const data = JSON.parse(xmlHttp.responseText)
+                const data = JSON.parse(xmlHttp.responseText);
                 return resolve({ data: data, error: false });
             } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
                 return resolve({ data: '', error: true });

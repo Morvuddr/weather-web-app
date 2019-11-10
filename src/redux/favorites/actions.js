@@ -4,6 +4,26 @@ import WeatherLocalStorage from '../../helpers/WeatherLocalStorage';
 import LocationService from '../../helpers/LocationService';
 import generateId from '../../helpers/generateId';
 
+export function initCities() {
+    return async (dispatch) => {
+        const cities = new WeatherLocalStorage(CITIES).getItem() || [];
+        cities.map(async localCity => {
+            dispatch(addNewCityLoading(localCity.id, true));
+            dispatch(addNewCity(localCity));
+            const { city, error } = await LocationService.getWeatherByCityName(localCity.name);
+            city.id = localCity.id;
+
+            if (error) {
+                dispatch(loadingError(localCity.id));
+            } else {
+                dispatch(updateCity(city));
+            }
+
+            dispatch(addNewCityLoading(localCity.id, false));
+        });
+    };
+}
+
 export function addNewCityAsync(newCity) {
     return async (dispatch) => {
         if (!newCity.id) {
@@ -32,26 +52,6 @@ export function addNewCity(city) {
 
 export function updateCity(city) {
     return ({ type: types.UPDATE_CITY, payload: { city } });
-}
-
-export function initCities() {
-    return async (dispatch) => {
-        const cities = new WeatherLocalStorage(CITIES).getItem() || [];
-        cities.map(async localCity => {
-            dispatch(addNewCityLoading(localCity.id, true));
-            dispatch(addNewCity(localCity));
-            const { city, error } = await LocationService.getWeatherByCityName(localCity.name);
-            city.id = localCity.id;
-
-            if (error) {
-                dispatch(loadingError(localCity.id));
-            } else {
-                dispatch(updateCity(city));
-            }
-
-            dispatch(addNewCityLoading(localCity.id, false));
-        });
-    };
 }
 
 export function removeCity(id) {

@@ -2,56 +2,44 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../styles/App.css';
 import MainContainer from './MainContainer';
-import LocationService from '../helpers/LocationService';
 import Header from '../components/Header';
 import FavoritesContainer from './FavoritesContainer';
 import { initCities } from '../redux/favorites/actions';
+import { initWeather } from '../redux/city/actions';
 
 class App extends Component {
-    state = {
-        isLoading: true,
-        weather: {},
-    };
-
     constructor(props) {
         super(props);
-        this.initWeather();
+        props.initWeather();
         props.initCities();
     }
 
-    initWeather = () => {
-        LocationService.handleUpdateLocation()
-            .then(weather => this.setState({ weather, isLoading: false }));
-    };
-
     handleUpdateWeather = () => {
-        this.setState({
-            isLoading: true
-        });
-
-        LocationService.handleUpdateLocation()
-            .then(weather => this.setState({ weather, isLoading: false }));
+        this.props.initWeather();
     };
 
     render() {
-        const { isLoading, weather } = this.state;
+        const { isLoading, weather, error } = this.props;
         return (
             <div className='App'>
                 <Header onUpdate={this.handleUpdateWeather}/>
-                <MainContainer weather={weather} isLoading={isLoading}/>
-                <FavoritesContainer cities={this.props.cities}/>
+                <MainContainer weather={weather} isLoading={isLoading} error={error}/>
+                <FavoritesContainer/>
             </div>
         );
     }
 }
 
-const mapStateToProps = ({ city }) => {
+const mapStateToProps = ({ city: { isLoading, error, weather } }) => {
     return {
-        city: city,
+        isLoading,
+        error,
+        weather,
     };
 };
 const mapDispatchToProps = {
-    initCities: initCities
+    initCities: initCities,
+    initWeather: initWeather,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -3,32 +3,26 @@ import '../styles/MainContainer.css'
 import WeatherInfo from '../components/WeatherInfo';
 import Loader from '../components/Loader';
 import CurrentCityComponent from '../components/CurrentCityComponent'
+import Error from '../components/Error';
 
 export default class MainContainer extends React.Component {
-
     render() {
-        const { weather, isLoading } = this.props;
-        if (isLoading) {
-            return (
-                <div className="Main">
-                    <Loader />
-                </div>
-            );
-        }
+        const { weather, isLoading, error } = this.props;
         return (
             <div className="Main">
-                {isLoading
+                { !error ?
+                    (isLoading
                     ? <Loader />
                     : (
                         <>
                             <CurrentCityComponent weather={weather} />
                             <WeatherInfo weather={weather} />
                         </>
-                    )
+                    ))
+                    :
+                    <Error />
                 }
             </div>
         );
     }
-
-
 }
