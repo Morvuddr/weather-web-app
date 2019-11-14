@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search component matches the snapshot 1`] = `
+<div
+  className="search"
+>
+  <h1>
+    Избранное
+  </h1>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      className="searchInput"
+      name="cityName"
+      placeholder="Добавить новый город"
+      required="required"
+    />
+    <button
+      className="searchButton"
+      type="submit"
+    >
+      +
+    </button>
+  </form>
+</div>
+`;

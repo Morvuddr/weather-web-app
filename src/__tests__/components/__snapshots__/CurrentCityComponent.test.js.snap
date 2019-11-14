@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrentCityComponent component matches the snapshot when the weather object is not null 1`] = `
+<div
+  className="currentCity"
+>
+  <h1>
+    Moscow
+  </h1>
+  <div
+    className="additionalInfo"
+  >
+    <img
+      alt="Иконка погоды"
+      className="weatherImage"
+      src="abcd"
+    />
+    <h1>
+      1
+    </h1>
+  </div>
+</div>
+`;
+
+exports[`CurrentCityComponent component matches the snapshot when the weather object is null 1`] = `null`;

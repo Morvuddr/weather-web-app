@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeatherInfo component matches the snapshot when weather != null 1`] = `
+<div
+  className="WeatherInfo"
+>
+  <div
+    className="Info"
+  >
+    <h3>
+      Ветер
+    </h3>
+    <h4>
+      wind
+    </h4>
+  </div>
+  <div
+    className="Info"
+  >
+    <h3>
+      Облачность
+    </h3>
+    <h4>
+      cloudiness
+    </h4>
+  </div>
+  <div
+    className="Info"
+  >
+    <h3>
+      Давление
+    </h3>
+    <h4>
+      pressure
+    </h4>
+  </div>
+  <div
+    className="Info"
+  >
+    <h3>
+      Влажность
+    </h3>
+    <h4>
+      humidity
+    </h4>
+  </div>
+  <div
+    className="Info"
+  >
+    <h3>
+      Координаты
+    </h3>
+    <h4>
+      [location]
+    </h4>
+  </div>
+</div>
+`;
+
+exports[`WeatherInfo component matches the snapshot when weather == null 1`] = `null`;
