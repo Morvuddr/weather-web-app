@@ -10,6 +10,7 @@ class FavoritesContainer extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.addCity({ name: e.target.cityName.value });
+        e.target[0].value = '';
     };
 
     handleRemove = (id) => {

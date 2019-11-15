@@ -44,10 +44,9 @@ export function addNewCityAsync(newCity) {
             }
         } else {
             dispatch(updateCity(city));
+            new WeatherLocalStorage(CITIES).addArrayItem(newCity);
+            dispatch(addNewCityLoading(newCity.id, false));
         }
-
-        new WeatherLocalStorage(CITIES).addArrayItem(newCity);
-        dispatch(addNewCityLoading(newCity.id, false));
     };
 }
 
