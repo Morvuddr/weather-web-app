@@ -5,7 +5,7 @@ export function initWeather() {
     return async (dispatch) => {
         dispatch(loadingStart());
         const { city, error } = await LocationService.handleUpdateLocation();
-        if (!error) {
+        if (!error.status) {
             dispatch(loadingSuccess(city));
         } else {
             dispatch(loadingError());

@@ -13,7 +13,7 @@ export function initCities() {
             const { city, error } = await LocationService.getWeatherByCityName(localCity.name);
             city.id = localCity.id;
 
-            if (error) {
+            if (error.status) {
                 dispatch(loadingError(localCity.id));
             } else {
                 dispatch(updateCity(city));
@@ -35,8 +35,13 @@ export function addNewCityAsync(newCity) {
         const { city, error } = await LocationService.getWeatherByCityName(newCity.name);
         city.id = newCity.id;
 
-        if (error) {
-            dispatch(loadingError(newCity.id));
+        if (error.status) {
+            if (error.code !== 404) {
+                dispatch(loadingError(newCity.id));
+            } else {
+                alert('Невозможно найти погоду для города: ' + newCity.name);
+                dispatch(removeCity(newCity.id));
+            }
         } else {
             dispatch(updateCity(city));
         }

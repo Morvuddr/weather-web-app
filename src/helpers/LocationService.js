@@ -38,9 +38,10 @@ export default class LocationService {
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                 const data = JSON.parse(xmlHttp.responseText);
-                return resolve({ data: data, error: false });
+                return resolve({ data: data, error: { code: 200, status: false } });
             } else if (xmlHttp.readyState === 4 && xmlHttp.status !== 200) {
-                return resolve({ data: '', error: true });
+                const data = JSON.parse(xmlHttp.responseText);
+                return resolve({ data: '', error: { code: parseInt(data.cod), status: true } });
             }
         };
         xmlHttp.open("GET", `${url}${destinationURL}`, true);
@@ -48,7 +49,7 @@ export default class LocationService {
     });
 
     static parseWeatherData = ({data, error}) => {
-        if (error) {
+        if (error.status) {
             return ({
                 city: {},
                 error: error,
