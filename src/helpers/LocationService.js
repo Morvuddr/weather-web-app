@@ -19,8 +19,8 @@ export default class LocationService {
             console.error(`Get location error ${e}`);
         }
         return {
-            lat: position ? position.coords.latitude.toFixed(2) : '30.32',
-            lon: position ? position.coords.longitude.toFixed(2) : '59.9',
+            lat: position ? position.coords.latitude.toFixed(2) : '59.91',
+            lon: position ? position.coords.longitude.toFixed(2) : '30.32',
         };
     };
 

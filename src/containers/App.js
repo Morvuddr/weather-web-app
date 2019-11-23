@@ -8,15 +8,15 @@ import { initCities } from '../redux/favorites/actions';
 import { initWeather } from '../redux/city/actions';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        props.initWeather();
-        props.initCities();
-    }
 
     handleUpdateWeather = () => {
         this.props.initWeather();
     };
+
+    componentDidMount() {
+        this.props.initWeather();
+        this.props.initCities();
+    }
 
     render() {
         const { isLoading, weather, error } = this.props;
