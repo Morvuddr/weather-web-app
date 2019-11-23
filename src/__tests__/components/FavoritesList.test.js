@@ -2,8 +2,9 @@ import FavoritesList from '../../components/FavoritesList';
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-describe('FavoritesList component', () => {
-    const cities = [
+let cities;
+beforeEach(() => {
+    cities = [
         {
             id: '1',
             name: 'Moscow',
@@ -27,6 +28,9 @@ describe('FavoritesList component', () => {
             location: '[location]'
         }
     ];
+});
+describe('FavoritesList component', () => {
+
     test('matches the snapshot when cities loaded', () => {
 
         const tree = renderer.create(

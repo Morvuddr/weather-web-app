@@ -11,6 +11,16 @@ const mockStore = configureMockStore(middlewares);
 describe('App container', () => {
 
     test('matches the snapshot when local weather is loaded and favorites cities are loaded', () => {
+        const mockGeolocation = {
+            getCurrentPosition: jest.fn()
+                .mockImplementation((success) => Promise.resolve(success({
+                    coords: {
+                        latitude: 10,
+                        longitude: 10
+                    }
+                })))
+        };
+        navigator.geolocation = mockGeolocation;
         const city = {
             isLoading: false,
             error: false,
